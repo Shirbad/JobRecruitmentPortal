@@ -194,4 +194,26 @@ footer {
   .job-list-scroll {
     max-height: 150px;
   }
+  /* Hide scrollbar for Chrome, Safari and Opera */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.Toastify__toast-container {
+  z-index: 9999 !important; /* Ensure it appears above all elements */
+  position: fixed !important;
+  top: 10px !important; /* Adjust spacing */
+  left: 50%;
+  transform: translateX(-50%);
+}
+.Toastify__toast {
+  z-index: 10000 !important;
+}
+
 }

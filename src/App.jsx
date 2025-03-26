@@ -8,6 +8,10 @@ import SignUp from "./Component/SignUp";
 import SearchBar from "./Component/SearchBar";
 import JobList from "./Component/JobList";
 import PostJobForm from "./Component/PostAJob";
+import AdminDashboard from "./Component/adminDashboard";
+import JobPosting from "./Component/jobPosting";
+import SavedJobs from "./Component/savedJobs";
+import AppliedJobs from "./Component/appliedJobs";
 
 const App = () => {
   const [isAdmin, setIsAdmin] = useState(false);
@@ -16,7 +20,7 @@ const App = () => {
   useEffect(() => {
     const role = localStorage.getItem("role");
     setIsAdmin(role === "admin");
-    setIsLoggedIn(!!localStorage.getItem("user")); // Check if the user is logged in
+    setIsLoggedIn(!!localStorage.getItem("user"));
   }, []);
 
   return (
@@ -28,24 +32,23 @@ const App = () => {
             <Routes>
               <Route path="/signin" element={<SignIn />} />
               <Route path="/signup" element={<SignUp />} />
-              <Route path="/PostAJob" element={<PostJobForm/>}/>
+              <Route path="/PostAJob" element={<PostJobForm />} />
+              <Route path="/jobPosting" element={<JobPosting/>}/>
+              <Route path="/savedJobs" element={<SavedJobs/>}/>
+              <Route path="/appliedJobs" element={<AppliedJobs/>}/>
+              <Route
+                path="/adminDashboard"
+                element={isLoggedIn && isAdmin ? <AdminDashboard /> : <Navigate to="/signin" replace />}
+              />
+              
+              {/* Home Page is Always Accessible */}
               <Route
                 path="/"
                 element={
-                  isAdmin ? (
-                    isLoggedIn ? (
-                      <div className="admin-dashboard bg-gray-100 h-[80vh] flex items-center justify-center">
-                        <h2 className="text-gray-500 text-xl">Admin Dashboard</h2>
-                      </div>
-                    ) : (
-                      <Navigate to="/signin" replace/>
-                    )
-                  ) : (
-                    <div className="main-content">
-                      <SearchBar />
-                      <JobList />
-                    </div>
-                  )
+                  <div className="main-content">
+                    <SearchBar />
+                    <JobList />
+                  </div>
                 }
               />
             </Routes>
